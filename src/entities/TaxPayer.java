@@ -14,7 +14,6 @@ public class TaxPayer {
 
 	public TaxPayer(double salaryIncome, double servicesIncome, double capitalIncome, double healthSpending,
 			double educationSpending) {
-		super();
 		this.salaryIncome = salaryIncome;
 		this.servicesIncome = servicesIncome;
 		this.capitalIncome = capitalIncome;
@@ -70,12 +69,12 @@ public class TaxPayer {
 	}
 
 	public double salaryTax() {
-		double salarioMensal = salaryIncome / 12;
+		double monthlySalary = salaryIncome / 12;
 		double imposto = 0;
 
-		if (salarioMensal < 3000.0) {
+		if (monthlySalary < 3000.0) {
 			imposto = 0;
-		} else if (salarioMensal < 5000.0) {
+		} else if (monthlySalary < 5000.0) {
 			imposto = salaryIncome * 10 / 100;
 		} else {
 			imposto = salaryIncome * 20 / 100;
@@ -85,56 +84,43 @@ public class TaxPayer {
 	}
 
 	public double servicesTax() {
-		double impostoServicos = 0.0;
+		double servTax = 0.0;
 		if (servicesIncome > 0.0) {
-			impostoServicos = servicesIncome * 15 / 100;
+			servTax = servicesIncome * 15 / 100;
 		}
-		return impostoServicos;
+		return servTax;
 	}
 
 	public double capitalTax() {
-		double impostoCapital = 0;
+		double capTax = 0;
 
 		if (capitalIncome > 0.0) {
-			impostoCapital = capitalIncome * 20 / 100;
+			capTax = capitalIncome * 20 / 100;
 		}
-		return impostoCapital;
+		return capTax;
 
 	}
-	
+
 	public double grossTax() {
-		
+
 		return salaryTax() + servicesTax() + capitalTax();
 	}
-	
+
 	public double taxRebate() {
-		double condicaoAbatimento = grossTax() * 30 / 100;
-		double abatimento = 0;
-		
-		if (condicaoAbatimento > healthSpending + educationSpending) {
-			abatimento = healthSpending + educationSpending;
+		double rabateCondition = grossTax() * 30 / 100;
+		double rebate = 0;
+
+		if (rabateCondition > healthSpending + educationSpending) {
+			rebate = healthSpending + educationSpending;
 		} else {
-			abatimento = grossTax() * 30 / 100;
+			rebate = grossTax() * 30 / 100;
 		}
-				
-		return abatimento;
+
+		return rebate;
 	}
-	
+
 	public double netTax() {
 		return grossTax() - taxRebate();
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
